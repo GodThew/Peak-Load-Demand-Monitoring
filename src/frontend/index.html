@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Energy Monitor | Real-time Peak Demand</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <div class="logo">
+          <span class="icon">⚡</span>
+          <h1>Energy<span class="highlight">Guard</span></h1>
+        </div>
+        <div class="status-bar">
+          <span id="clock">--:--:--</span>
+          <span class="badge" id="system-status">System Online</span>
+        </div>
+      </header>
+
+      <main>
+        <div class="dashboard-grid" id="factory-grid">
+          <!-- Factory Cards will be injected here by JS -->
+        </div>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
