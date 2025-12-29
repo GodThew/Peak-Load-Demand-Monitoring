@@ -181,34 +181,40 @@ DATA_SOURCE=pea_amr
 
 ## 🎯 Next Steps
 
-### Phase 2.2: Update PEA Website Selectors
+### Phase 4.1: Testing & Validation ⭐ **Current Priority**
 
-**⚠️ CRITICAL: ต้องตรวจสอบ PEA AMR website structure จริงๆ**
+1. **Test Live Scraper**
 
-1. เปิด PEA AMR website ในเบราว์เซอร์
-2. ใช้ Developer Tools (F12) ดู HTML structure
-3. อัพเดท selectors ใน `pea_scraper.py`:
+   ```bash
+   cd src/backend
+   python pea_scraper.py
+   ```
 
-```python
-# ตัวอย่างที่ต้องแก้:
-await self.page.fill('input[name="username"]', ...)  # ← แก้ selector
-await self.page.fill('input[name="password"]', ...)  # ← แก้ selector
-await self.page.click('button[type="submit"]')       # ← แก้ selector
-```
+   - Verify login success for all 4 plants
+   - Confirm data extraction accuracy
+   - Check database writes
 
-4. ทดสอบจริงด้วย: `python pea_scraper.py`
+2. **Test Backend API**
+   ```bash
+   python main.py
+   ```
+   - Verify `/api/status` returns live data
+   - Check health endpoint `/api/health`
+   - Confirm background scraping runs every 15 mins
 
-### Phase 2.3: Backend Integration
+### Phase 4.2: Frontend Dashboard Updates
 
-- เชื่อม scraper เข้ากับ `main.py`
-- สร้าง scheduled task (ทุก 15 นาที)
-- สลับระหว่าง simulation/real data
+- [ ] Update `app.js` to display data source badge (Live/Simulation)
+- [ ] Show "Last Updated" timestamp from PEA
+- [ ] Add connection status indicator
+- [ ] Error handling and user notifications
 
-### Phase 2.4: Frontend Updates
+### Phase 4.3: Line Notify Alerts
 
-- แสดง "Data Source" badge
-- แสดง "Last Updated" timestamp
-- Error notifications
+- [ ] Create Line Notify integration module
+- [ ] Set threshold alerts (e.g., 90% of control line)
+- [ ] Test notification delivery
+- [ ] Add alert configuration in `.env`
 
 ---
 
@@ -258,16 +264,30 @@ grep -r "password" src/
 
 ## 🚨 Current Status
 
-- ✅ Configuration system ready
-- ✅ Multi-plant scraper structure complete
-- ⚠️ **Need PEA website selectors** (ต้องอัพเดทก่อนใช้งานจริง)
-- ⏳ Backend integration pending
-- ⏳ Frontend updates pending
+### ✅ **Completed (Phase 2 & 3)**
+
+- ✅ Configuration system with multi-plant support (4 factories)
+- ✅ PEA AMR web scraper fully working (login + data extraction)
+- ✅ Database integration (SQLite with historical data storage)
+- ✅ Backend API with FastAPI (live + simulation modes)
+- ✅ Background scraping scheduler (every 15 minutes)
+- ✅ Security: `.env` configuration, `.gitignore` protection
+- ✅ GitHub repository setup and synced
+
+### 🔄 **In Progress**
+
+- ⏳ Frontend dashboard updates (data source badges, timestamps)
+- ⏳ Line Notify integration for alerts
+
+### 📋 **Pending**
+
+- ⏳ Production deployment and 24/7 operation
+- ⏳ Advanced analytics and reporting features
 
 ---
 
 ## 📞 Support
 
 - **Project**: Peak Load Demand Monitoring
-- **Last Updated**: 2025-12-28
+- **Last Updated**: 2025-12-29
 - **AI Agent**: Antigravity

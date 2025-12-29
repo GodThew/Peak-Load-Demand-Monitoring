@@ -24,21 +24,28 @@
 
 ## Phase 2: Web Crawler Implementation (New Direction)
 
-- [ ] **Prototype Scraper**:
-  - [ ] Install Playwright/Selenium
-  - [ ] Implement Login Logic with Safe Credential Storage (`.env`)
-  - [ ] Handle Session/CAPTCHA
-- [ ] **Data Extraction**:
-  - [ ] Parse "Load Profile" table for 15-min intervals
-  - [ ] Extract current Demand value
-- [ ] **Dashboard Integration**:
-  - [ ] Connect Crawler data to existing Dashboard UI
+- [x] **Prototype Scraper**:
+  - [x] Install Playwright/Selenium
+  - [x] Implement Login Logic with Safe Credential Storage (`.env`)
+  - [x] Handle Session/CAPTCHA (Basic detection implemented)
+- [x] **Data Extraction**:
+  - [x] Parse "Load Profile" table for 15-min intervals
+  - [x] Extract current Demand value (Rate A/B/C)
+- [x] **Backend Integration**:
+  - [x] Connect Scraper to FastAPI (`main.py`)
+  - [x] Background scraping task (every 15 mins)
+  - [x] Dual mode: Simulation + Live PEA data
 
 ## Phase 3: Integration & Alerting
 
-- [ ] Database Setup (SQLite/JSON for local storage)
-- [ ] Line Notify Integration (Critical Alerting)
-- [ ] Automated Scheduler (Run every 15 mins)
+- [x] Database Setup (SQLite with `database.py`)
+- [x] Historical data storage and retrieval
+- [x] Monthly/Yearly summary calculations
+- [ ] **Line Notify Integration** (Critical Alerting) - Pending
+- [/] **Frontend Dashboard Updates** (In Progress):
+  - [ ] Data source badge (Live/Simulation)
+  - [ ] Last updated timestamp display
+  - [ ] Real-time data visualization
 
 ## Deprecated / Alternative (Phase 2 Old)
 
