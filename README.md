@@ -157,16 +157,25 @@ DATA_SOURCE=pea_amr
 
 ## 📊 API Endpoints
 
-### Current (Simulation)
+### Current Features
 
 - `GET /` - Health check
-- `GET /api/status` - Factory status (simulation data)
+- `GET /api/status` - Factory status (Live/Simulation)
+- `GET /api/plants/live` - Force live scrape trigger
+- `GET /api/history/readings` - Historical data access
+- `GET /api/summary/monthly` - Peak reduction analytics
 
-### Upcoming (After PEA Integration)
+### Database
 
-- `GET /api/status` - Real PEA data
-- `GET /api/source` - Data source indicator
-- `POST /api/scrape/trigger` - Manual scrape trigger
+ระบบใช้ **SQLite** (`energy_data.db`) ในการเก็บข้อมูลประวัติ:
+
+- บันทึกข้อมูลทุกครั้งที่มีการ Scrape
+- คำนวณ Monthly/Yearly Summary อัตโนมัติ
+
+### Upcoming
+
+- `GET /api/export/excel` - Download reports
+- Frontend Analytics Dashboard
 
 ---
 

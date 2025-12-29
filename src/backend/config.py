@@ -45,7 +45,10 @@ class Config:
     # System settings
     API_HOST = os.getenv("API_HOST", "0.0.0.0")
     API_PORT = int(os.getenv("API_PORT", "8000"))
-    DATA_SOURCE = os.getenv("DATA_SOURCE", "simulation")  # "simulation" or "pea_amr"
+    SYSTEM_MODE = os.getenv("SYSTEM_MODE", "live")  # "live" or "simulation"
+    CACHE_DURATION_SECONDS = int(
+        os.getenv("CACHE_DURATION_SECONDS", "300")
+    )  # 5 minutes
 
     # Scraper settings
     SCRAPE_INTERVAL_MINUTES = int(os.getenv("SCRAPE_INTERVAL_MINUTES", "15"))
@@ -84,7 +87,7 @@ config = Config()
 if __name__ == "__main__":
     # Test configuration
     print("=== Configuration Status ===")
-    print(f"Data Source: {config.DATA_SOURCE}")
+    print(f"System Mode: {config.SYSTEM_MODE}")
     print(f"Configured Plants: {config.get_configured_plant_count()}/4")
     print()
 
