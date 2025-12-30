@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../src/backend/energy_data.db"
+}
+
+model energy_readings {
+  id           Int       @id @default(autoincrement())
+  plant_id     String
+  timestamp    String
+  current_kw   Float
+  rate_a_kw    Float?    @default(0)
+  rate_b_kw    Float?    @default(0)
+  rate_c_kw    Float?    @default(0)
+  is_peak_time Int?
+  control_line Float?
+  plant_type   String?
+  plant_name   String?
+  scraped_at   String?
+  source       String?   @default("pea_amr")
+
+  @@unique([plant_id, timestamp], map: "sqlite_autoindex_energy_readings_1")
+  // @@index([timestamp(sort: Desc)], map: "idx_timestamp") 
+  // Indexes on String will be different, commenting out for debug
+  // @@index([plant_id, timestamp(sort: Desc)], map: "idx_plant_timestamp")
+}
+
+model monthly_peak_summary {
+  id                        Int       @id @default(autoincrement())
+  plant_id                  String
+  plant_name                String?
+  year                      Int
+  month                     Int
+  max_demand_kw             Float?
+  max_demand_timestamp      DateTime?
+  avg_demand_kw             Float?
+  min_demand_kw             Float?
+  max_peak_time_kw          Float?
+  avg_peak_time_kw          Float?
+  peak_time_hours           Int?
+  control_line              Float?
+  times_exceeded            Int?
+  max_excess_kw             Float?
+  avg_excess_kw             Float?
+  previous_month_peak       Float?
+  reduction_vs_previous_kw  Float?
+  reduction_vs_previous_pct Float?
+  reduction_vs_control_kw   Float?
+  reduction_vs_control_pct  Float?
+  utilization_pct           Float?
+  compliance_score          Float?
+  created_at                DateTime? @default(now())
+
+  @@unique([plant_id, year, month], map: "sqlite_autoindex_monthly_peak_summary_1")
+}
+
+model yearly_summary {
+  id                           Int       @id @default(autoincrement())
+  plant_id                     String
+  plant_name                   String?
+  year                         Int
+  max_demand_kw                Float?
+  max_demand_month             Int?
+  max_demand_timestamp         DateTime?
+  avg_monthly_peak_kw          Float?
+  avg_demand_kw                Float?
+  total_violations             Int?
+  avg_reduction_vs_control_pct Float?
+  best_month_reduction_kw      Float?
+  worst_month_reduction_kw     Float?
+  control_line                 Float?
+  achieved_target              Boolean?
+  previous_year_peak           Float?
+  yoy_reduction_kw             Float?
+  yoy_reduction_pct            Float?
+  created_at                   DateTime? @default(now())
+
+  @@unique([plant_id, year], map: "sqlite_autoindex_yearly_summary_1")
+}
